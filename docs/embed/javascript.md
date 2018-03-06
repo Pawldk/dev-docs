@@ -93,6 +93,7 @@ When instantiating `Flat.Embed`, you can pass options in the second parameter. I
   * [`play`](#play-promisevoid-error): Start playback
   * [`pause`](#pause-promisevoid-error): Pause playback
   * [`stop`](#stop-promisevoid-error): Stop playback
+  * [`mute`](#mute-promisevoid-error): Mute playback
   * [`print`](#print-promisevoid-error): Print the score
   * [`getZoom`](#getzoom-promisenumber-error): Get the current display zoom ratio
   * [`setZoom`](#setzoomnumber-promisenumber-error): Change the display zoom ratio
@@ -350,6 +351,16 @@ embed.stop().then(function () {
 });
 ```
 
+### `mute(): Promise<void, Error>`
+
+Mute the playback
+
+```js
+embed.mute().then(function () {
+  // The playback is muted
+});
+```
+
 ### `print(): Promise<void, Error>`
 
 Print the score
@@ -482,7 +493,7 @@ You can enable the editor mode by setting the `mode` to `edit` when creating the
 var embed = new Flat.Embed(container, {
   embedParams: {
     appId: '<your-app-id>',
-    modeL 'edit'
+    mode: 'edit'
   }
 });
 ```
