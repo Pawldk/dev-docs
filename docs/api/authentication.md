@@ -52,6 +52,18 @@ You will need to choose and include a list of requested scopes during the OAuth 
 | `scores.readonly` | Read-only access to all a user's scores. |
 | `scores.social` | Post comments and like scores |
 | `scores` | Full, permissive scope to access all of a user's scores. |
+| `collections.readonly`| Allow read-only access to a user's collections. |
+| `collections.add_scores` | Allow to add scores to a user's collections. |
+| `collections` | Full, permissive scope to access all of a user's collections. |
+| `edu.classes` | Full, permissive scope to manage the classes. |
+| `edu.classes.readonly` | Read-only access to the classes. |
+| `edu.assignments` | Read-write access to the assignments and submissions. |
+| `edu.assignments.readonly` | Read-only access to the assignments and submissions. |
+| `edu.admin` | Full, permissive scope to manage all the admin of an organization. |
+| `edu.admin.lti` | Access and manage the LTI Credentials for an organization. |
+| `edu.admin.lti.readonly` | Read-only access to the LTI Credentials of an organization. |
+| `edu.admin.users` | Access and manage the users and invitations of the organization. |
+| `edu.admin.users.readonly` | Read-only access to the users and invitations of the organization. |
 
 ## Authorization Page
 
