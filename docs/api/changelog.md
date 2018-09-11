@@ -12,6 +12,17 @@ We regularly update our API and services, you can discover all the changes to ou
 * On 2019-01-01:
   * `GET /users/{user}/scores` will no longer list private and shared scores, but only public scores of a Flat account.
 
+## v2.7.0 (2018-09-11)
+
+* update(spec): specify `produces` and `consumes` on endpoints instead of globally
+* feat(scores): now support Guitar Pro (GP3, GP4, GP5, GPX, GP), PowerTab, TuxGuitar and MuseScore files in POST /scores
+* feat(scores): add support for `filename` when importing scores
+* feat(collections): `parent` collection can now be a collection id when listing collections
+* feat(collections): includes parent collections when listing scores
+* feat(collections): add `creationDate` property in collection details
+* feat(comments): add `staffUuid` for contextualized comments, which will completely replace `staffIdx` in the future
+* feat(rights): now return a `isCollaborator` boolean property with the Score or Collection rights
+* update(account): added new locales supported
 
 ## v2.6.0 (2018-04-23)
 
