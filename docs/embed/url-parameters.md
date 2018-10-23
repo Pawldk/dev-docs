@@ -25,16 +25,6 @@ These URL query strings control the engraving display of your music scores. You 
 | [`layout`](#change-the-music-engraving-layout-mode-layout) | Display the score in responsive, page or track mode | `responsive`, `page` or `track` (default = `responsive`) |
 | [`zoom`](#change-zoom-scaling-zoom) | Default zoom value | `auto` or `0.1` to `3` (default = `auto`)|
 
-## Loading modules
-
-Our embed product works in modules and doesn't load all the components at once. The main reason is that, for example, not every visitor or user will print the sheet music displayed in the embed. This substantially lightweight the embed size and improve the loading speed. However, you can specify these parameters if you want to preload the components that will be used for sure.
-
-| Query Parameter | Summary | Values | Auto |
-|:----------------|:--------|:-------|:----:|
-| `jsapi` | Load Embed JavaScript API | `true` or `false` (default = `false`) | No |
-| `pdf` | Load PDF Export & Print | `true` or `false` (default = `false`) | Yes |
-| `musicxml` | Load MusicXML conversion engine | `true` or `false` (default = `false`) | Yes |
-
 ## Controls & Theme customization
 
 If you want to customize the controls, including changing their main colors or hide some of them, you can add the following options in your URL.
@@ -46,13 +36,13 @@ The following features require an Embed API Key to be used.
 | [`theme*`](#embed-theme) | Change the embed theme | [Read more](#embed-theme) |
 | [`branding`](#remove-flat-branding-branding) | Display or hide Flat logo | `true` or `false` (default = `true`)|
 | [`controlsDisplay`](#display-or-hide-the-controls-controlsdisplay) | Display or hide main controls | `true` or `false` (default = `true`)|
-| [`controlsFloating`](#change-controls-floating-mode-controlsfloating) | Stack the controls or let them float | `true` or `false` (default = `true`)|
+| [`controlsPosition`](#change-controls-position-controlsposition) | Controls position | `bottom` or `top` (default = `bottom`)|
 | [`controlsMetronome`](#display-or-hide-metronome-control-controlsmetronome) | Display or hide the metronome | `true` or `false` (default = `true`)|
 | [`controlsPlay`](#display-or-hide-playback-control-controlsplay) | Display or hide the play/stop button | `true` or `false` (default = `true`)|
 | [`controlsFullscreen`](#display-or-hide-fullscreen-control-controlsfullscreen) | Display or hide the fullscreen button | `true` or `false` (default = `true`)|
-| [`controlsPanel`](#display-or-hide-side-panel-control-controlspanel) | Display or hide the side panel button | `true` or `false` (default = `true`)|
-| [`controlsVolume`](#display-or-hide-volume-side-panel-controls-controlsvolume) | Display or hide the volume controls | `true` or `false` (default = `true`)|
-| [`controlsZoom`](#display-or-hide-zoom-side-panel-controls-controlszoom) | Display or hide the zoom control | `true` or `false` (default = `true`)|
+| [`controlsPanel`](#display-or-hide-the-extra-controls-button-controlspanel) | Display or hide the extra controls button | `true` or `false` (default = `true`)|
+| [`controlsVolume`](#display-or-hide-volume-controls-controlsvolume) | Display or hide the volume controls | `true` or `false` (default = `true`)|
+| [`controlsZoom`](#display-or-hide-zoom--controls-controlszoom) | Display or hide the zoom control | `true` or `false` (default = `true`)|
 | [`controlsPrint`](#display-or-hide-print-control-controlsprint) | Display or hide the print button | `true` or `false` (default = `true`)|
 
 ## Audio & Video sources
@@ -62,7 +52,7 @@ On any score on hosted on Flat, you can link one or multiple audio/video sources
 | Query Parameter | Summary | Values |
 |:----------------|:--------|:-------|
 | `audioSource` | Audio source to use when loading the embed | `playback`, `default` (the track marked as default, or playback if none), or the [unique identifier of the track to use](https://flat.io/developers/api/reference/#operation/listScoreTracks) (default value = `playback`) |
-| [`videoPosition`](#video-position-videoposition) | Display position of the video in the embed | `top`, `left`, `float`, `hidden` (default = `hidden`) |
+| [`videoPosition`](#video-position-videoposition) | Display position of the video in the embed | `top`, `bottom`, `left`, `float`, `hidden` (default = `hidden`) |
 
 ## Playback options
 
@@ -110,57 +100,57 @@ To remove the Flat logo from the controls, set the parameter `branding` to `fals
 
 ### Display or hide the controls (`controlsDisplay`)
 
-If you implements your own controls or don't need them, you can disable the ones in the embed by setting the parameter `controlsDisplay` to `false`
+If you implements your own controls or don't need them, you can disable the ones in the embed by setting the parameter `controlsDisplay` to `false`.
 
 ![Embed controls]({{site.baseurl}}/assets/img/embed-controls.png)
 
-### Change controls floating mode (`controlsFloating`)
+### Change controls position (`controlsPosition`)
 
-By default the controls float at the bottom of the embed, which is a pretty cool way to have an iframe without a border that is well integrated with the parent page. When the visitor clicks on the fullscreen icon, the controls are stacked at the bottom of the screen. This last version can be used in the non-fullscreen display by setting this parameter to `false`.
+By default the controls are displayed at the `bottom` of the embed. You can choose the display them at the top by setting the parameter `controlsPosition` to `top`.
 
-![Embed stacked]({{site.baseurl}}/assets/img/embed-stacked.png)
+![Embed controls at the top]({{site.baseurl}}/assets/img/embed-ctrl-top.png)
 
 ### Display or hide Metronome control (`controlsMetronome`)
 
-This control is displayed by default, you can hide it by settings this parameter to `false`.
+This control is displayed by default, you can hide it by setting this parameter to `false`.
 
 ![Metronome control]({{site.baseurl}}/assets/img/embed-metronome-ctrl.png)
 
 ### Display or hide Playback control (`controlsPlay`)
 
-This control is displayed by default, you can hide it by settings this parameter to `false`.
+This control is displayed by default, you can hide it by setting this parameter to `false`.
 
 ![Playback control]({{site.baseurl}}/assets/img/embed-play-ctrl.png)
 
 ### Display or hide Fullscreen control (`controlsFullscreen`)
 
-This control is displayed by default, you can hide it by settings this parameter to `false`.
+This control is displayed by default, you can hide it by setting this parameter to `false`.
 
 ![Fullscreen control]({{site.baseurl}}/assets/img/embed-fullscreen-ctrl.png)
 
-### Display or hide Side Panel control (`controlsPanel`)
+### Display or hide the extra controls button (`controlsPanel`)
 
-This control is displayed by default, you can hide it by settings this parameter to `false`.
+This control is displayed by default, you can hide it by setting this parameter to `false`.
 
 ![Side Panel control]({{site.baseurl}}/assets/img/embed-panel-ctrl.png)
 
-### Display or hide Volume side-panel controls (`controlsVolume`)
+### Display or hide Volume controls (`controlsVolume`)
 
-This side panel is enabled by default, you can disable it by settings this parameter to `false`.
+The volume controls are displayed by default when the playback is used, you can disable it by setting this parameter to `false`.
 
 ![Volume control]({{site.baseurl}}/assets/img/embed-volume-ctrl.png)
 
-### Display or hide Zoom side-panel controls (`controlsZoom`)
+### Display or hide Zoom  controls (`controlsZoom`)
 
-This side panel is enabled by default, you can disable it by settings this parameter to `false`.
+This side panel is enabled by default, you can disable it by setting this parameter to `false`.
 
-![Zoom control]({{site.baseurl}}/assets/img/embed-zoom-ctrl.png)
+![Zoom control]({{site.baseurl}}/assets/img/embed-fullscreen-ctrl.png)
 
 ### Display or hide Print control (`controlsPrint`)
 
-This control is displayed by default, you can hide it by settings this parameter to `false`.
+This control is displayed by default, you can hide it by setting this parameter to `false`.
 
-![Print control]({{site.baseurl}}/assets/img/embed-print-ctrl.png)
+![Print control]({{site.baseurl}}/assets/img/embed-fullscreen-ctrl.png)
 
 ### Embed theme
 
@@ -178,10 +168,9 @@ You can completely change the embed theme by changing the different color option
 
 Please note that these parameters need to be encoded if needed (e.g. `themeControlsBackground=%23B71C1C`).
 
-Demo: Let's say that we want to hide the Flat branding, stack the controls and display them with different reds (controls background and main voice cursor). We can use the following options as query strings:
+Demo: Let's say that we want to hide the Flat branding, display the controls different reds (controls background and main voice cursor). We can use the following options as query strings:
 
 * [```branding=false```](#remove-flat-branding-branding)
-* [```controlsFloating=false```](#change-controls-floating-mode-controlsfloating)
 * ```themeControlsBackground=#B71C1C```
 * ```themeIconsPrimary=#E53935```
 * ```themeCursorV0=#E53935```
@@ -190,7 +179,7 @@ Demo: Let's say that we want to hide the Flat branding, stack the controls and d
 
 ### Video position (`videoPosition`)
 
-When using an [audio or video source](#audio--video-sources), you can customize the position of the player: `top`, `left`, `float`, `hidden`.
+When using an [audio or video source](#audio--video-sources), you can customize the position of the player: `top`, `bottom`, `left`, `float`, `hidden`.
 
 ### `top`
 
