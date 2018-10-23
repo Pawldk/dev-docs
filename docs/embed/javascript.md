@@ -4,25 +4,23 @@ description: Interact with our Sheet Music Embed, Get user events from our viewe
 permalink: embed/javascript.html
 pid: embed-js
 ---
-
 Use this JavaScript Client to interact and receive events from our [Sheet Music Embed](https://flat.io/developers/embed).
 
 If you have any feedback or questions regarding this product, [please feel free to contact our developers support](mailto:developers@flat.io).
 
 ## Installation
 
-You can install our Embed Client using [npm](https://www.npmjs.com/package/flat-embed), [yarn](https://yarnpkg.com/en/package/flat-embed) or bower:
+You can install our Embed Client using [npm](https://www.npmjs.com/package/flat-embed) or [yarn](https://yarnpkg.com/en/package/flat-embed):
 
 ```bash
 npm install flat-embed
 yarn add flat-embed
-bower install flat-embed
 ```
 
 or use the latest version hosted on jsDelivr:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/flat-embed@v0.8.0/dist/embed.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flat-embed@v0.10.0/dist/embed.min.js"></script>
 ```
 
 ## Getting Started
@@ -31,7 +29,7 @@ The simplest way to get started is to pass a DOM element to our embed that will 
 
 ```html
 <div id="embed-container"></div>
-<script src="https://cdn.jsdelivr.net/npm/flat-embed@v0.8.0/dist/embed.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flat-embed@v0.10.0/dist/embed.min.js"></script>
 <script>
   var container = document.getElementById('embed-container');
   var embed = new Flat.Embed(container, {
@@ -100,23 +98,19 @@ When instantiating `Flat.Embed`, you can pass options in the second parameter. I
   * [`getAutoZoom`](#getautozoom-promiseboolean-error): Get the state of the auto-zoom mode
   * [`setAutoZoom`](#setautozoomboolean-promiseboolean-error): Enable or disable the auto-zoom mode
   * [`focusScore`](#focusscore-promisevoid-error): Set the focus to the score
-  * [`setNoteColor`](#setnotecolornotelocation-object-color-string-promiseobject-error): Set the color for the given note
   * [`getCursorPosition`](#getcursorposition-promiseobject-error): Get the current cursor position of the score
   * [`setCursorPosition`](#setcursorpositionposition-object-promiseobject-error): Set a new position for the cursor
 * [Editor Methods](#editor-methods)
   * [`setEditorConfig`](#seteditorconfigconfig-object-promiseobject-error): Set the config of the editor
-  * [`edit`](#editoperations-object-promisevoid-error): Make a modification to the document
 * [Events API](#events-api)
   * [`scoreLoaded`](#event-scoreLoaded): A new score has been loaded
   * [`cursorPosition`](#event-cursorposition): The cursor position changed
   * [`rangeSelection`](#event-rangeSelection): The range selected changed
   * [`fullscreen`](#event-fullscreen): The fullscreen state changed
-  * [`print`](#event-print): The score was printed
   * [`play`](#event-play): The score playback started
   * [`pause`](#event-pause): The score playback paused
   * [`stop`](#event-stop): The score playback stopped
   * [`playbackPosition`](#event-playbackposition): The playback slider position changed
-  * [`edit`](#event-edit): An edition has been made to the document
 
 ## Viewer Methods
 
@@ -431,22 +425,6 @@ embed.focusScore().then(function () {
 });
 ```
 
-### `setNoteColor(noteLocation: object, color: string): Promise(<object, Error>)`
-
-Set the color of the note at the location `noteLocation` (on a specific note).
-
-```js
-embed.setNoteColor({
-    "partIdx": 0,
-    "voiceIdx": 0,
-    "measureIdx": 2,
-    "noteIdx": 1,
-    "line": 2.5
-}, 'red').then(function () {
-  // Note is now red
-});
-```
-
 ### `getCursorPosition(): Promise(<object, Error>)`
 
 Return the current position of the cursor (on a specific note).
@@ -500,33 +478,14 @@ var embed = new Flat.Embed(container, {
 
 ### `setEditorConfig(config: object): Promise<object, Error>`
 
+**NOTE: "Modes" are now deprecated and new options will be available for this method in the upcoming weeks. [Please contact our team](mailto:developers@flat.io) if you are interested in customizing the embed editor.**
+
 Set a new config for the editor (e.g. the different tools available in the embed). This one will be used at the next loading score.
 
 ```js
-// For example: hide the Articulation mode, and only display the durations tools in the Note mode
-embed.setEditorConfig({
-  noteMode: {
-    durations: true
-  },
-  articulationMode: false,
-  defaultMode: 'note'
-}).then(function (config) {
+embed.setEditorConfig({}).then(function (config) {
   // The config of the embed
   console.log(config);
-});
-```
-
-### `edit(operations: object): Promise<void, Error>`
-
-Process some edit operations using one of our internal editing method. Feel free to [contact our developers support](mailto:developers@flat.io) to get more information about the operations available.
-
-```js
-embed.edit([
-  { name: 'action.SetTitle', opts: { title: 'I <3 Flat'} }
-]).then(function () {
-  // The actions have been executed
-}).catch(function (error) {
-  // Error while executing the actions
 });
 ```
 
@@ -579,10 +538,6 @@ This event is triggered when a range of notes is selected or the selection chang
 
 This event is triggered when the state of the fullscreen changed. The callback will take a boolean as the first parameter that will be `true` if the fullscreen mode is enabled, and `false` is the display is back to normal (fullscreen exited).
 
-### Event: `print`
-
-This event is triggered when you or the end-user prints the score. This event doesn't include any data.
-
 ### Event: `play`
 
 This event is triggered when you or the end-user starts the playback. This event doesn't include any data.
@@ -607,26 +562,4 @@ This event is triggered when the playback slider moves. It is usually triggered 
     "currentMeasure": 1,
     "timePerMeasure": 2
 }
-```
-
-### Event: `edit`
-
-This event is triggered when one or multiple modifications ave been made to the document. This one will contain a list of operations made:
-
-```json
-[
-    {
-        "name": "action.SetTempo",
-        "opts": {
-            "startMeasureIdx": 0,
-            "stopMeasureIdx": 1,
-            "tempo": {
-                "bpm": 142,
-                "qpm": 142,
-                "durationType": 3,
-                "nbDots": 0
-            }
-        }
-    }
-]
 ```
