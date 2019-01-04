@@ -20,7 +20,7 @@ yarn add flat-embed
 or use the latest version hosted on jsDelivr:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/flat-embed@v0.10.0/dist/embed.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flat-embed@v0.11.0/dist/embed.min.js"></script>
 ```
 
 ## Getting Started
@@ -29,7 +29,7 @@ The simplest way to get started is to pass a DOM element to our embed that will 
 
 ```html
 <div id="embed-container"></div>
-<script src="https://cdn.jsdelivr.net/npm/flat-embed@v0.10.0/dist/embed.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flat-embed@v0.11.0/dist/embed.min.js"></script>
 <script>
   var container = document.getElementById('embed-container');
   var embed = new Flat.Embed(container, {
@@ -86,6 +86,7 @@ When instantiating `Flat.Embed`, you can pass options in the second parameter. I
   * [`getMusicXML`](#getmusicxmloptions-object-promisestringuint8array-error): Get the score in MusicXML (compressed or not)
   * [`getJSON`](#getjson-object): Get the score data in Flat JSON format
   * [`getPNG`](#getpngoptions-object-promisestringuint8array-error): Get the score as a PNG file
+  * [`getMIDI`](#getmidi-promiseuint8array-error): Get the score as a MIDI file
   * [`getScoreMeta`](#getscoremeta-object): Get the metadata from the current score (for hosted scores)
   * [`fullscreen`](#fullscreenstate-bool-promisevoid-error): Toggle fullscreen mode
   * [`play`](#play-promisevoid-error): Start playback
@@ -293,6 +294,17 @@ embed.getPNG({result: 'dataURL'}).then(function (png) {
 });
 ```
 
+### `getMIDI(): Promise<Uint8Array, Error>`
+
+Get the current displayed score as a MIDI file
+
+```js
+embed.getMIDI().then(function (midi) {
+  // MIDI file as a Uint8Array
+  console.log(midi);
+});
+```
+
 ### `getScoreMeta(): object`
 
 Get the score metadata of the hosted score. The object will have the same format that the one returned [by our API `GET /v2/scores/{score}`](https://flat.io/developers/api/reference/#operation/getScore).
@@ -434,7 +446,7 @@ embed.getCursorPosition().then(function (position) {
   // position: {
   //     "partIdx": 0,
   //     "staffIdx": 1,
-  //     "voiceIdx": 0,
+  //     "voiceIdxInStaff": 0,
   //     "measureIdx": 2,
   //     "noteIdx": 1
   // }
@@ -456,7 +468,7 @@ embed.setCursorPosition({
   // position: {
   //     "partIdx": 0,
   //     "staffIdx": 1,
-  //     "voiceIdx": 0,
+  //     "voiceIdxInStaff": 0,
   //     "measureIdx": 2,
   //     "noteIdx": 1
   // }
