@@ -24,6 +24,9 @@ These URL query strings control the engraving display of your music scores. You 
 |:----------------|:--------|:-------|
 | [`layout`](#change-the-music-engraving-layout-mode-layout) | Display the score in responsive, page or track mode | `responsive`, `page` or `track` (default = `responsive`) |
 | [`zoom`](#change-zoom-scaling-zoom) | Default zoom value | `auto` or `0.1` to `3` (default = `auto`)|
+| [`drawOnlyFirstPage`](#only-display-the-first-page-drawonlyfirstpage) | Only display the first `page` | `false` |
+
+The option `drawOnlyFirstPage` requires an API Key.
 
 ## Controls & Theme customization
 
@@ -91,6 +94,19 @@ You can use different zoom values:
 Example with `zoom=3` (i.e. Zoom x3):
 
 ![Embed zoom]({{site.baseurl}}/assets/img/embed-zoom.png)
+
+### Only display the first `page` (`drawOnlyFirstPage`)
+
+If you want to only draw the first page of the score, for example, to create a preview of a score. Please note that the complete file will still be completely loaded in the embed. To protect it, we advise you to use a dedicated preview file with only 1 page or little more available to display.
+
+Here is a demo with this option and the following parameters:
+
+* ```drawOnlyFirstPage=true```
+* ```branding=false```
+* ```controlsPosition=top```
+* ```controlsPrint=false```
+
+![Only display the first page]({{site.baseurl}}/assets/img/embed-drawOnlyFirstPage.png)
 
 ### Remove Flat branding (`branding`)
 
